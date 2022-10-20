@@ -1,6 +1,3 @@
-import warnings
-warnings.filterwarnings("ignore")
-
 import torch, cv2, os, time, numpy as np
 from std_msgs.msg import String
 from enum import Enum

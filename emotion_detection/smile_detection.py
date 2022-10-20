@@ -1,26 +1,14 @@
 #!/usr/bin/env python3
 """
 Smile detection node
-Copyright © 2021, Invento Research Inc. All rights reserved.
-
-Author:Vishnu
-Date: Feb 28, 2022
-Package: invento_vision
-   ___                      _          ____       _           _   _          
-  |_ _|_ ____   _____ _ __ | |_ ___   |  _ \ ___ | |__   ___ | |_(_) ___ ___ 
-   | || '_ \ \ / / _ \ '_ \| __/ _ \  | |_) / _ \| '_ \ / _ \| __| |/ __/ __|
-   | || | | \ V /  __/ | | | || (_) | |  _ < (_) | |_) | (_) | |_| | (__\__ \
-  |___|_| |_|\_/ \___|_| |_|\__\___/  |_| \_\___/|_.__/ \___/ \__|_|\___|___/
-																			   
+Author:Pranav C																	   
 """
 import cv2, numpy as np, time, glob, json, requests, rclpy
 from fer import FER
 from std_msgs.msg import String
 from deepface import DeepFace
-from invento_utilities.ros_img_conversion import Invento_img_process
-from invento_utilities.editor_tools import get_file_name, global_parameters
-from ament_index_python.packages import get_package_share_directory
-from invento_communication.local_data_sharing import SharedInfo
+from ros_img_conversion import Invento_img_process
+from editor_tools import get_file_name, global_parameters
 from rclpy.node import Node
 from threading import Thread
 from os.path import join
@@ -41,8 +29,8 @@ class SmileDetection(Node):
 		self.counter = 0
 		self.happy_confirm_counter = 0
 		self.start_time = time.time()
-		self.image_save_path =  join(get_package_share_directory('invento_vision'), 'saved_files','images','smiles')+'/'
-		self.collage_save_path =  join(get_package_share_directory('invento_vision'), 'saved_files','images','collages')+'/'
+		self.image_save_path =  join(get_package_share_directory('vision'), 'saved_files','images','smiles')+'/'
+		self.collage_save_path =  join(get_package_share_directory('vision'), 'saved_files','images','collages')+'/'
 		# self.width, self.height = 160, 120
 		self.mini_width, self.mini_height = self.get_parameter("image_width").value/4, self.get_parameter("image_height").value/4
 		self.robot_name = global_parameters.get("robot_name")
@@ -145,7 +133,6 @@ class SmileDetection(Node):
 		return SharedInfo.get_webrtc_image()
 
 	def create_collage(self):
-		# blank_image = np.zeros((480,640,3), np.uint8)
 		blank_image = np.zeros((self.height*3,self.width*5,3), np.uint8) #* Changed it to a grid of 3 rows and 5 columns
 		c = 0
 		h_start = w_start = 0 
@@ -261,7 +248,6 @@ class SmileDetection(Node):
 
 			self.prev_emotion = emotion
 			cv2.putText(frame,str(self.counter),(10,100),cv2.FONT_HERSHEY_DUPLEX,4,(0,255,255),3)
-			#SharedInfo.put_pose_image(frame) #* If you ever want to put this in webrtc for testing, debugging! 
 
 def main(args=None):
 	rclpy.init(args=args)

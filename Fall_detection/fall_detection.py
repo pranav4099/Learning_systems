@@ -1,29 +1,16 @@
 #!/usr/bin/env python3
 """
 ROS2 version of fall_detection with single NODE.
-Copyright © 2021, Invento Research Inc. All rights reserved.
-
-Author:Pranavc
-Date: Dec 31, 2021
-Package: invento_vision
-   ___                      _          ____       _           _   _          
-  |_ _|_ ____   _____ _ __ | |_ ___   |  _ \ ___ | |__   ___ | |_(_) ___ ___ 
-   | || '_ \ \ / / _ \ '_ \| __/ _ \  | |_) / _ \| '_ \ / _ \| __| |/ __/ __|
-   | || | | \ V /  __/ | | | || (_) | |  _ < (_) | |_) | (_) | |_| | (__\__ \
-  |___|_| |_|\_/ \___|_| |_|\__\___/  |_| \_\___/|_.__/ \___/ \__|_|\___|___/
-																			   
+Author:Pranav C															   
 """
-import warnings
-warnings.filterwarnings("ignore")
 import rclpy, torch, cv2, os, time, numpy as np, requests, json
 from rclpy.node import Node
 from std_msgs.msg import String, Bool
 from sensor_msgs.msg import Image
 from threading import Thread
-from invento_communication.local_data_sharing import SharedInfo
-from invento_custom_msgs.msg import FleetNotification, IpadMedia
+from custom_msgs.msg import FleetNotification, IpadMedia
 from ament_index_python.packages import get_package_share_directory
-from invento_utilities.editor_tools import check_new_image, global_parameters, get_file_name
+from utilities.editor_tools import check_new_image, global_parameters, get_file_name
 from os.path import join
 
 class Fall_detection(Node):

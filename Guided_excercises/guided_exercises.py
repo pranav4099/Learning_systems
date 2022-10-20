@@ -2,7 +2,6 @@
 """
 ROS2 guided exercises with a single NODE.
 Author:Pranav c
-Date: Dec 31, 2021																	   
 """
 import cv2, time, os, json, requests, mediapipe as mp, numpy as np
 from utilities.editor_tools import send_to_ipad
