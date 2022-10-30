@@ -2,7 +2,7 @@ import torch, cv2, os, time, numpy as np
 from std_msgs.msg import String
 from enum import Enum
 from threading import Thread
-from invento_utilities.editor_tools import get_file_name
+from editor_tools import get_file_name
 from ament_index_python.packages import get_package_share_directory
 
 from fastai.vision.all import parent_label
